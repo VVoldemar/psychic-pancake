@@ -1,0 +1,189 @@
+ Image redis:7.4-alpine Pulling 
+ 4a603bc2424c Pulling fs layer 0B
+ 4f4fb700ef54 Pulling fs layer 0B
+ 6c0bde7286d0 Pulling fs layer 0B
+ ad83137ff0b2 Pulling fs layer 0B
+ 0e50696bc150 Pulling fs layer 0B
+ f55179448640 Pulling fs layer 0B
+ 710f3da1112f Pulling fs layer 0B
+ dfed3a5d50b9 Downloading 24.69kB
+ dfed3a5d50b9 Download complete 0B
+ 5864e364268f Download complete 0B
+ 4a603bc2424c Download complete 0B
+ 6c0bde7286d0 Download complete 0B
+ 4f4fb700ef54 Download complete 0B
+ 0e50696bc150 Download complete 0B
+ ad83137ff0b2 Download complete 0B
+ f55179448640 Downloading 1.049MB
+ f55179448640 Downloading 1.049MB
+ f55179448640 Downloading 1.049MB
+ f55179448640 Downloading 1.049MB
+ f55179448640 Downloading 2.097MB
+ f55179448640 Downloading 2.097MB
+ f55179448640 Downloading 3.146MB
+ f55179448640 Downloading 3.146MB
+ f55179448640 Downloading 3.146MB
+ f55179448640 Downloading 5.243MB
+ f55179448640 Downloading 5.243MB
+ f55179448640 Downloading 5.243MB
+ f55179448640 Downloading 7.34MB
+ f55179448640 Downloading 7.34MB
+ f55179448640 Downloading 7.34MB
+ f55179448640 Downloading 7.34MB
+ f55179448640 Downloading 9.437MB
+ f55179448640 Downloading 9.437MB
+ f55179448640 Downloading 10.49MB
+ f55179448640 Downloading 11.53MB
+ f55179448640 Downloading 12.42MB
+ f55179448640 Download complete 0B
+ 710f3da1112f Downloading 1.049MB
+ 710f3da1112f Downloading 1.049MB
+ 710f3da1112f Downloading 2.097MB
+ 710f3da1112f Downloading 2.097MB
+ 710f3da1112f Downloading 2.097MB
+ 710f3da1112f Downloading 2.097MB
+ 710f3da1112f Download complete 0B
+ 710f3da1112f Extracting 1B
+ 710f3da1112f Extracting 1B
+ 6c0bde7286d0 Pull complete 0B
+ 710f3da1112f Pull complete 0B
+ ad83137ff0b2 Extracting 1B
+ ad83137ff0b2 Pull complete 0B
+ f55179448640 Extracting 1B
+ f55179448640 Extracting 1B
+ f55179448640 Extracting 1B
+ f55179448640 Extracting 1B
+ 4a603bc2424c Pull complete 0B
+ 4f4fb700ef54 Pull complete 0B
+ 0e50696bc150 Pull complete 0B
+ f55179448640 Pull complete 0B
+ Image redis:7.4-alpine Pulled 
+ Volume hw_3_template_redis-data Creating 
+ Volume hw_3_template_redis-data Created 
+ Container hw_3_template-redis-1 Creating 
+ Container hw_3_template-redis-1 Created 
+ Container hw_3_template-app-1 Recreate 
+ Container hw_3_template-app-1 Recreated 
+ Container hw_3_template-redis-1 Starting 
+ Container hw_3_template-redis-1 Started 
+ Container hw_3_template-redis-1 Waiting 
+ Container hw_3_template-redis-1 Healthy 
+ Container hw_3_template-app-1 Starting 
+ Container hw_3_template-app-1 Started 
+ Container hw_3_template-redis-1 Waiting 
+ Container hw_3_template-app-1 Waiting 
+ Container hw_3_template-redis-1 Healthy 
+ Container hw_3_template-app-1 Healthy 
+NAME                    IMAGE               COMMAND                  SERVICE   CREATED         STATUS                   PORTS
+hw_3_template-app-1     hw3-counter:local   "python app.py"          app       9 seconds ago   Up 5 seconds (healthy)   127.0.0.1:8080->8000/tcp
+hw_3_template-redis-1   redis:7.4-alpine    "docker-entrypoint.s…"   redis     9 seconds ago   Up 9 seconds (healthy)   6379/tcp
+{"greeting": "hello world", "count": 0, "hostname": "e9bec4e90c75", "storage": "redis"}
+HTTP 200
+{"greeting": "hello world", "count": 1, "hostname": "e9bec4e90c75", "storage": "redis"}
+HTTP 200
+{"greeting": "hello world", "count": 2, "hostname": "e9bec4e90c75", "storage": "redis"}
+HTTP 200
+{"greeting": "hello world", "count": 3, "hostname": "e9bec4e90c75", "storage": "redis"}
+HTTP 200
+ Container hw_3_template-app-1 Stopping 
+ Container hw_3_template-app-1 Stopped 
+ Container hw_3_template-app-1 Removing 
+ Container hw_3_template-app-1 Removed 
+ Container hw_3_template-redis-1 Stopping 
+ Container hw_3_template-redis-1 Stopped 
+ Container hw_3_template-redis-1 Removing 
+ Container hw_3_template-redis-1 Removed 
+ Network hw_3_template_default Removing 
+ Network hw_3_template_default Removed 
+ Network hw_3_template_default Creating 
+ Network hw_3_template_default Created 
+ Container hw_3_template-redis-1 Creating 
+ Container hw_3_template-redis-1 Created 
+ Container hw_3_template-app-1 Creating 
+ Container hw_3_template-app-1 Created 
+ Container hw_3_template-redis-1 Starting 
+ Container hw_3_template-redis-1 Started 
+ Container hw_3_template-redis-1 Waiting 
+ Container hw_3_template-redis-1 Healthy 
+ Container hw_3_template-app-1 Starting 
+ Container hw_3_template-app-1 Started 
+ Container hw_3_template-app-1 Waiting 
+ Container hw_3_template-redis-1 Waiting 
+ Container hw_3_template-redis-1 Healthy 
+ Container hw_3_template-app-1 Healthy 
+{"greeting": "hello world", "count": 3, "hostname": "7d2cbbc7fa93", "storage": "redis"}
+HTTP 200
+ Container hw_3_template-redis-1 Stopping 
+ Container hw_3_template-redis-1 Stopped 
+{"status": "alive"}
+HTTP 200
+{"error": "storage_unavailable"}
+HTTP 503
+{"error": "storage_unavailable"}
+HTTP 503
+ Container hw_3_template-redis-1 Starting 
+ Container hw_3_template-redis-1 Started 
+ Container hw_3_template-redis-1 Waiting 
+ Container hw_3_template-redis-1 Healthy 
+{"greeting": "hello world", "count": 3, "hostname": "7d2cbbc7fa93", "storage": "redis"}
+HTTP 200
+{"greeting": "hello world", "count": 4, "hostname": "7d2cbbc7fa93", "storage": "redis"}
+HTTP 200
+app-1    | 2026-11-25 20:17:14,028 listening port=8000 storage=redis
+app-1    | 2026-11-25 20:17:18,765 http 127.0.0.1 "GET /readyz HTTP/1.1" 200 -
+redis-1  | 1:C 25 Nov 2026 20:17:10.085 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1  | 1:C 25 Nov 2026 20:17:10.086 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 25 Nov 2026 20:17:10.086 * Redis version=7.4.12, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 25 Nov 2026 20:17:10.086 * Configuration loaded
+redis-1  | 1:M 25 Nov 2026 20:17:10.086 * Increased maximum number of open files to 10032 (it was originally set to 2048).
+redis-1  | 1:M 25 Nov 2026 20:17:10.086 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 25 Nov 2026 20:17:10.087 * Running mode=standalone, port=6379.
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * Server initialized
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * Reading RDB base file on AOF loading...
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * Loading RDB produced by version 7.4.12
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * RDB age 21 seconds
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * RDB memory usage when created 0.90 Mb
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * RDB is base AOF
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * Done loading RDB, keys loaded: 0, keys expired: 0.
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * DB loaded from base file appendonly.aof.1.base.rdb: 0.000 seconds
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * DB loaded from incr file appendonly.aof.1.incr.aof: 0.000 seconds
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * DB loaded from append only file: 0.000 seconds
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * Opening AOF incr file appendonly.aof.1.incr.aof on server start
+app-1    | 2026-11-25 20:17:18,890 http 172.18.0.1 "GET / HTTP/1.1" 200 -
+redis-1  | 1:M 25 Nov 2026 20:17:10.088 * Ready to accept connections tcp
+redis-1  | 1:signal-handler (1795637839) Received SIGTERM scheduling shutdown...
+redis-1  | 1:M 25 Nov 2026 20:17:19.153 * User requested shutdown...
+redis-1  | 1:M 25 Nov 2026 20:17:19.153 * Calling fsync() on the AOF file.
+redis-1  | 1:M 25 Nov 2026 20:17:19.153 * Saving the final RDB snapshot before exiting.
+redis-1  | 1:M 25 Nov 2026 20:17:19.160 * DB saved on disk
+redis-1  | 1:M 25 Nov 2026 20:17:19.161 # Redis is now ready to exit, bye bye...
+redis-1  | 1:C 25 Nov 2026 20:17:27.206 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+app-1    | 2026-11-25 20:17:19,301 http 172.18.0.1 "GET /healthz HTTP/1.1" 200 -
+app-1    | 2026-11-25 20:17:22,789 storage_unavailable: ConnectionError
+app-1    | 2026-11-25 20:17:22,790 storage_unavailable: ConnectionError
+app-1    | 2026-11-25 20:17:22,790 http 127.0.0.1 "GET /readyz HTTP/1.1" 503 -
+app-1    | 2026-11-25 20:17:22,790 http 172.18.0.1 "GET /readyz HTTP/1.1" 503 -
+app-1    | 2026-11-25 20:17:26,790 storage_unavailable: ConnectionError
+app-1    | 2026-11-25 20:17:26,790 http 172.18.0.1 "POST /increment HTTP/1.1" 503 -
+app-1    | 2026-11-25 20:17:26,790 storage_unavailable: ConnectionError
+app-1    | 2026-11-25 20:17:26,790 http 127.0.0.1 "GET /readyz HTTP/1.1" 503 -
+app-1    | 2026-11-25 20:17:30,232 http 172.18.0.1 "GET / HTTP/1.1" 200 -
+app-1    | 2026-11-25 20:17:30,242 http 172.18.0.1 "POST /increment HTTP/1.1" 200 -
+redis-1  | 1:C 25 Nov 2026 20:17:27.206 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 25 Nov 2026 20:17:27.206 * Redis version=7.4.12, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 25 Nov 2026 20:17:27.206 * Configuration loaded
+redis-1  | 1:M 25 Nov 2026 20:17:27.207 * Increased maximum number of open files to 10032 (it was originally set to 2048).
+redis-1  | 1:M 25 Nov 2026 20:17:27.207 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 25 Nov 2026 20:17:27.207 * Running mode=standalone, port=6379.
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * Server initialized
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * Reading RDB base file on AOF loading...
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * Loading RDB produced by version 7.4.12
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * RDB age 38 seconds
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * RDB memory usage when created 0.90 Mb
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * RDB is base AOF
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * Done loading RDB, keys loaded: 0, keys expired: 0.
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * DB loaded from base file appendonly.aof.1.base.rdb: 0.000 seconds
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * DB loaded from incr file appendonly.aof.1.incr.aof: 0.000 seconds
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * DB loaded from append only file: 0.000 seconds
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * Opening AOF incr file appendonly.aof.1.incr.aof on server start
+redis-1  | 1:M 25 Nov 2026 20:17:27.208 * Ready to accept connections tcp

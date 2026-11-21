@@ -1,0 +1,70 @@
+$ docker compose -p hw3-check-321f37fd4625 -f /home/user/code/uni/hw_3_template/compose.yaml up -d --no-build --wait --wait-timeout 90
+ Network hw3-check-321f37fd4625_default Creating 
+ Volume hw3-check-321f37fd4625_redis-data Creating 
+ Volume hw3-check-321f37fd4625_redis-data Created 
+ Network hw3-check-321f37fd4625_default Created 
+ Container hw3-check-321f37fd4625-redis-1 Creating 
+ Container hw3-check-321f37fd4625-redis-1 Created 
+ Container hw3-check-321f37fd4625-app-1 Creating 
+ Container hw3-check-321f37fd4625-app-1 Created 
+ Container hw3-check-321f37fd4625-redis-1 Starting 
+ Container hw3-check-321f37fd4625-redis-1 Started 
+ Container hw3-check-321f37fd4625-redis-1 Waiting 
+ Container hw3-check-321f37fd4625-redis-1 Healthy 
+ Container hw3-check-321f37fd4625-app-1 Starting 
+ Container hw3-check-321f37fd4625-app-1 Started 
+ Container hw3-check-321f37fd4625-app-1 Waiting 
+ Container hw3-check-321f37fd4625-redis-1 Waiting 
+ Container hw3-check-321f37fd4625-redis-1 Healthy 
+ Container hw3-check-321f37fd4625-app-1 Healthy 
+$ docker compose -p hw3-check-321f37fd4625 -f /home/user/code/uni/hw_3_template/compose.yaml port app 8000
+127.0.0.1:32772
+GET / 200 {"greeting": "hello world", "count": 0, "hostname": "59537059c514", "storage": "redis"}
+POST /increment 200 {"greeting": "hello world", "count": 1, "hostname": "59537059c514", "storage": "redis"}
+POST /increment 200 {"greeting": "hello world", "count": 2, "hostname": "59537059c514", "storage": "redis"}
+POST /increment 200 {"greeting": "hello world", "count": 3, "hostname": "59537059c514", "storage": "redis"}
+GET / 200 {"greeting": "hello world", "count": 3, "hostname": "59537059c514", "storage": "redis"}
+$ docker compose -p hw3-check-321f37fd4625 -f /home/user/code/uni/hw_3_template/compose.yaml up -d --no-build --no-deps --force-recreate --wait --wait-timeout 90 app
+ Container hw3-check-321f37fd4625-app-1 Recreate 
+ Container hw3-check-321f37fd4625-app-1 Recreated 
+ Container hw3-check-321f37fd4625-app-1 Starting 
+ Container hw3-check-321f37fd4625-app-1 Started 
+ Container hw3-check-321f37fd4625-app-1 Waiting 
+ Container hw3-check-321f37fd4625-app-1 Healthy 
+$ docker compose -p hw3-check-321f37fd4625 -f /home/user/code/uni/hw_3_template/compose.yaml port app 8000
+127.0.0.1:32773
+GET / 200 {"greeting": "hello world", "count": 3, "hostname": "3720d4dd62e5", "storage": "redis"}
+$ docker compose -p hw3-check-321f37fd4625 -f /home/user/code/uni/hw_3_template/compose.yaml stop --timeout 30 redis
+ Container hw3-check-321f37fd4625-redis-1 Stopping 
+ Container hw3-check-321f37fd4625-redis-1 Stopped 
+GET /healthz 200 {"status": "alive"}
+GET /readyz 503 {"error": "storage_unavailable"}
+POST /increment 503 {"error": "storage_unavailable"}
+$ docker compose -p hw3-check-321f37fd4625 -f /home/user/code/uni/hw_3_template/compose.yaml start --wait --wait-timeout 90 redis
+ Container hw3-check-321f37fd4625-redis-1 Starting 
+ Container hw3-check-321f37fd4625-redis-1 Started 
+ Container hw3-check-321f37fd4625-redis-1 Waiting 
+ Container hw3-check-321f37fd4625-redis-1 Healthy 
+GET / 200 {"greeting": "hello world", "count": 3, "hostname": "3720d4dd62e5", "storage": "redis"}
+POST /increment 200 {"greeting": "hello world", "count": 4, "hostname": "3720d4dd62e5", "storage": "redis"}
+$ docker compose -p hw3-check-321f37fd4625 -f /home/user/code/uni/hw_3_template/compose.yaml stop --timeout 30 app
+ Container hw3-check-321f37fd4625-app-1 Stopping 
+ Container hw3-check-321f37fd4625-app-1 Stopped 
+$ docker compose -p hw3-check-321f37fd4625 -f /home/user/code/uni/hw_3_template/compose.yaml stop --timeout 30 redis
+ Container hw3-check-321f37fd4625-redis-1 Stopping 
+ Container hw3-check-321f37fd4625-redis-1 Stopped 
+$ docker run --rm --name hw3-check-321f37fd4625-backup --user 0:0 --mount type=volume,source=hw3-check-321f37fd4625_redis-data,target=/data,readonly --entrypoint tar redis:7.4-alpine -C /data -cpf - .
+$ docker compose -p hw3-check-321f37fd4625 -f /home/user/code/uni/hw_3_template/compose.yaml down --volumes --timeout 30
+ Container hw3-check-321f37fd4625-app-1 Stopping 
+ Container hw3-check-321f37fd4625-app-1 Stopped 
+ Container hw3-check-321f37fd4625-app-1 Removing 
+ Container hw3-check-321f37fd4625-app-1 Removed 
+ Container hw3-check-321f37fd4625-redis-1 Stopping 
+ Container hw3-check-321f37fd4625-redis-1 Stopped 
+ Container hw3-check-321f37fd4625-redis-1 Removing 
+ Container hw3-check-321f37fd4625-redis-1 Removed 
+ Volume hw3-check-321f37fd4625_redis-data Removing 
+ Network hw3-check-321f37fd4625_default Removing 
+ Volume hw3-check-321f37fd4625_redis-data Removed 
+ Network hw3-check-321f37fd4625_default Removed 
+PASS. Backup: /home/user/code/uni/hw_3_template/backups/hw3-check-321f37fd4625.tar

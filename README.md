@@ -19,6 +19,23 @@ HOST_PORT=8080
 GREETING="hello world"
 ```
 
+## на 10тку
+
+```sh
+sudo python3 scripts/check.py 2>&1 | tee level10-run-1.log
+sudo python3 scripts/check.py 2>&1 | tee level10-run-2.log
+```
+
+```sh
+tail -n 1 level10-run-1.log
+tail -n 1 level10-run-2.log
+```
+
+```text
+PASS. Backup: /home/user/code/uni/hw_3_template/backups/hw3-check-321f37fd4625.tar
+PASS. Backup: /home/user/code/uni/hw_3_template/backups/hw3-check-3c76ead5b45b.tar
+```
+
 ## Проверка 1 части
 
 ```sh

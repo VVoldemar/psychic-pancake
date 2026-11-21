@@ -1,0 +1,94 @@
+$ docker build --network=host -t hw3-counter:local . 
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 322B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-slim
+#2 DONE 1.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 84B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 94B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/python:3.13-slim@sha256:6d68eb6310a906f26c7638eb6ea7557d4261662df3181af2f80f1f9a7e34c549
+#5 resolve docker.io/library/python:3.13-slim@sha256:6d68eb6310a906f26c7638eb6ea7557d4261662df3181af2f80f1f9a7e34c549 0.0s done
+#5 DONE 0.0s
+
+#6 [2/5] WORKDIR /app
+#6 CACHED
+
+#7 [3/5] COPY app/requirements.txt ./requirements.txt
+#7 CACHED
+
+#8 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#8 2.199 Collecting redis==5.2.1 (from -r requirements.txt (line 1))
+#8 2.722   Downloading redis-5.2.1-py3-none-any.whl.metadata (9.1 kB)
+#8 2.816 Downloading redis-5.2.1-py3-none-any.whl (261 kB)
+#8 3.383 Installing collected packages: redis
+#8 3.639 Successfully installed redis-5.2.1
+#8 3.640 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#8 3.641 
+#8 3.641 [notice] A new release of pip is available: 26.2.2 -> 26.3
+#8 3.641 [notice] To update, run: pip install --upgrade pip
+#8 DONE 3.8s
+
+#9 [5/5] COPY app/app.py ./app.py
+#9 DONE 0.1s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 0.2s done
+#10 exporting manifest sha256:58b155b892bb4a6831ae6a5ab0403dd27c8366802780840d5ede9b2e812204fd 0.0s done
+#10 exporting config sha256:14fcc624d3b3d0ffe243542dfe9d2fe7606e12ec6c5f424434e467b4260375df 0.0s done
+#10 exporting attestation manifest sha256:8664ba534af8c6048023ed5ddf30a69cb84ac1f610c010b18106c4777555fb90 0.0s done
+#10 exporting manifest list sha256:a1b6a5b0af10cc58f218cb5b60aa76afdad0f564a24a54f32d329d5a165a61b1 done
+#10 naming to docker.io/library/hw3-counter:local done
+#10 unpacking to docker.io/library/hw3-counter:local 0.1s done
+#10 DONE 0.4s
+$ docker stop hw3-counter 
+hw3-counter
+$ docker compose up -d --no-build --force-recreate 
+ Network hw_3_template_default Creating 
+ Volume hw_3_template_counter-data Creating 
+ Volume hw_3_template_counter-data Created 
+ Network hw_3_template_default Created 
+ Container hw_3_template-app-1 Creating 
+ Container hw_3_template-app-1 Created 
+ Container hw_3_template-app-1 Starting 
+ Container hw_3_template-app-1 Started 
+$ curl -fsS --max-time 5 -X GET http://127.0.0.1:8080/
+{"greeting": "hello world", "count": 0, "hostname": "3c97bcd4fed3", "storage": "sqlite"}
+$ curl -fsS --max-time 5 -X POST http://127.0.0.1:8080/increment
+{"greeting": "hello world", "count": 1, "hostname": "3c97bcd4fed3", "storage": "sqlite"}
+$ docker compose logs --no-color app 
+app-1  | 2026-11-24 10:42:14,022 listening port=8000 storage=sqlite
+app-1  | 2026-11-24 10:42:14,772 http 172.18.0.1 "GET /readyz HTTP/1.1" 200 -
+app-1  | 2026-11-24 10:42:14,782 http 172.18.0.1 "GET / HTTP/1.1" 200 -
+app-1  | 2026-11-24 10:42:15,035 http 172.18.0.1 "POST /increment HTTP/1.1" 200 -
+$ docker compose down 
+ Container hw_3_template-app-1 Stopping 
+ Container hw_3_template-app-1 Stopped 
+ Container hw_3_template-app-1 Removing 
+ Container hw_3_template-app-1 Removed 
+ Network hw_3_template_default Removing 
+ Network hw_3_template_default Removed 
+$ docker compose up -d --no-build 
+ Network hw_3_template_default Creating 
+ Network hw_3_template_default Created 
+ Container hw_3_template-app-1 Creating 
+ Container hw_3_template-app-1 Created 
+ Container hw_3_template-app-1 Starting 
+ Container hw_3_template-app-1 Started 
+$ curl -fsS --max-time 5 -X GET http://127.0.0.1:8080/
+{"greeting": "hello world", "count": 1, "hostname": "f36de142fcb3", "storage": "sqlite"}
+$ docker compose logs --no-color app 
+app-1  | 2026-11-24 10:42:26,522 listening port=8000 storage=sqlite
+app-1  | 2026-11-24 10:42:27,271 http 172.18.0.1 "GET /readyz HTTP/1.1" 200 -
+app-1  | 2026-11-24 10:42:27,280 http 172.18.0.1 "GET / HTTP/1.1" 200 -
+PASS: 0 -> 1 -> 1
